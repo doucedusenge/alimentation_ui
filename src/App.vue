@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <LoginComp v-if="!is_connected" @connectEmited="is_connected=true"></LoginComp>
+    <div v-else>
+      <MenuComp @DecoHome="is_connected=false">
+        <slot ></slot>
+      </MenuComp>
+    </div>    
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import LoginComp from './components/LoginComp.vue'
+import MenuComp from './components/MenuComp.vue'
 export default {
-  name: 'App',
+  data(){
+    return {
+      is_connected:false,
+    }
+  },
   components: {
-    HelloWorld
-  }
+    LoginComp,
+    MenuComp
+}
 }
 </script>
 
 <style>
 #app {
+
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
